@@ -3,7 +3,7 @@ use ts_macro::ts_block;
 fn main() {
     let r1 = ts_block!({
         let str: number[] = ["Hello", "TS", "World"];
-        return str.join();
+        return str.join(" ");
     });
     println!("{}", r1);
 
