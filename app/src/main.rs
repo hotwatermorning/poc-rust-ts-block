@@ -13,5 +13,5 @@ fn main() {
     let r = ts_macro::ts_block!({
         console.log("hello TS world.");
     });
-    assert_eq!(r, 42)
+    assert_eq!(r, "hello TS world.")
 }

@@ -1,3 +1,4 @@
+#[macro_use]
 #[allow(unused_imports)]
 extern crate ts_macro_impl;
 #[doc(hidden)]

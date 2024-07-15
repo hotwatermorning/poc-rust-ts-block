@@ -290,9 +290,24 @@ fn gen_cpp_lib(visitor: &Parser) -> PathBuf {
     println!("result file path: {}", result_path.to_str().unwrap());
     let mut output = File::create(&result_path).expect("Unable to generate *.ts file");
 
+    for Closure { body_str, sig, .. } in &visitor.closures {
+        let name = sig.extern_name();
+
+        #[rustfmt::skip]
+        write_add_line!(output, r#"
+const {name} = () => {{
+    {body}
+}}
+"#,
+            name = &name,
+            body = body_str
+        )
+        .unwrap();
+    }
+
     #[rustfmt::skip]
     write_add_line!(output, r#"
-const invoke = (func_name: string): string => {{
+const invoke = (func_name: string) => {{
 "#).unwrap();
     for c in visitor.closures.iter() {
         let name = c.sig.extern_name();
@@ -303,29 +318,10 @@ const invoke = (func_name: string): string => {{
     #[rustfmt::skip]
     write_add_line!(output, r#"
     return "";
-}}"#).unwrap();
-
-    for Closure {
-        body_str,
-        sig,
-        callback_offset,
-        ..
-    } in &visitor.closures
-    {
-        let hash = sig.name_hash();
-        let name = sig.extern_name();
-
-        #[rustfmt::skip]
-        write_add_line!(output, r#"
-const {name} = (): string => {{
-    {body}
 }}
-"#,
-            name = &name,
-            body = body_str
-        )
-        .unwrap();
-    }
+
+import {{ argv }} from 'node:process';
+invoke(argv[2]);"#).unwrap();
 
     result_path
 }
