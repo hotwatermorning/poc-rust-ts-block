@@ -7,3 +7,5 @@ members = [
   "builder",
   "common",
 ]
+
+default-members = [ "app" ]
