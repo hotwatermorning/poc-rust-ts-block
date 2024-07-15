@@ -297,10 +297,12 @@ fn gen_cpp_lib(visitor: &Parser) -> PathBuf {
         write_add_line!(output, r#"
 const {name} = () => {{
     {body}
+    // {std_body}
 }}
 "#,
             name = &name,
-            body = body_str
+            body = body_str,
+            std_body = sig.std_body
         )
         .unwrap();
     }

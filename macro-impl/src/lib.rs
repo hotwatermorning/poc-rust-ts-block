@@ -28,8 +28,7 @@ pub fn expand_internal(input: proc_macro::TokenStream) -> proc_macro::TokenStrea
     // Parse the macro input
     let input = extract_original_macro(&parse_macro_input!(input as syn::DeriveInput)).unwrap();
     let sig = ClosureSig {
-        std_body: input
-            .to_string()
+        std_body: format!("{{{}}}", input)
             .chars()
             .filter(|x| !x.is_whitespace())
             .collect(),
@@ -37,13 +36,14 @@ pub fn expand_internal(input: proc_macro::TokenStream) -> proc_macro::TokenStrea
 
     let extern_name = sig.extern_name();
     println!("extern_name: {}", extern_name);
+    println!("#### std_body: {}", sig.std_body);
 
     let call = quote! {
         let output = std::process::Command::new("tsx")
         .args([std::env::var("TS_AUTOGEN_FILE").unwrap(), stringify!(#extern_name).to_string()])
         .output()
         .expect("failed to execute process");
-        String::from_utf8(output.stdout).unwrap()
+        String::from_utf8(output.stdout).unwrap().trim().to_string()
     };
 
     let result = quote! {
