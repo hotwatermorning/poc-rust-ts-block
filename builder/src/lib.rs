@@ -297,12 +297,10 @@ fn gen_cpp_lib(visitor: &Parser) -> PathBuf {
         write_add_line!(output, r#"
 const {name} = () => {{
     {body}
-    // {std_body}
 }}
 "#,
             name = &name,
-            body = body_str,
-            std_body = sig.std_body
+            body = body_str
         )
         .unwrap();
     }
@@ -315,7 +313,7 @@ const invoke = (func_name: string) => {{
         let name = c.sig.extern_name();
         #[rustfmt::skip]
         write_add_line!(output, r#"
-    if(func_name === "{name}") {{ return {name}(); }}"#).unwrap();
+    if(func_name === "{name}") {{ console.log({name}()); }}"#).unwrap();
     }
     #[rustfmt::skip]
     write_add_line!(output, r#"

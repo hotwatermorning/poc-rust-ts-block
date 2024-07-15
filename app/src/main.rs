@@ -4,14 +4,15 @@ fn main() {
         std::env::var("TS_AUTOGEN_FILE").unwrap()
     );
 
-    let x = ts_macro::ts_block! {{
-        const i = 3;
-        const j = 4;
-        console.log("i * j = ", i * j);
-    }};
-
-    let r = ts_macro::ts_block!({
-        console.log("hello TS world.");
+    let r1 = ts_macro::ts_block!({
+        let str: number[] = ["Hello", "TS", "World"];
+        return str.join();
     });
-    assert_eq!(r, "hello TS world.")
+    println!("{}", r1);
+
+    let r2 = ts_macro::ts_block! {{
+        let now = new Date();
+        return now.toISOString();
+    }};
+    println!("{}", r2);
 }
