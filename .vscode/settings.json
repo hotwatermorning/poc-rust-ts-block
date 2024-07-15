@@ -1,0 +1,6 @@
+{
+  "rust-analyzer.procMacro.ignored": {
+    "cpp_macros": ["__cpp_internal_closure"],
+    "cpp": ["__cpp_internal_closure"]
+  }
+}
