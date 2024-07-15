@@ -9,7 +9,7 @@ use std::{
 };
 
 use strnom::*;
-use ts_macro_test_common::*;
+use ts_macro_common::*;
 mod strnom;
 
 fn warnln_impl(a: &str) {
@@ -369,10 +369,8 @@ In order to provide a better error message, the build script will exit successfu
     // Generate the C++ library code
     let filename = gen_cpp_lib(&visitor);
 
-    println!("filename: {}", filename.to_str().unwrap());
-    // マクロの箇所を特定
-
-    // マクロを別ファイルに書き込み
-
-    // マクロ呼び出しを pnpm コマンドの呼び出しに変更
+    println!(
+        "cargo::rustc-env=TS_AUTOGEN_FILE={}",
+        filename.to_str().unwrap()
+    );
 }

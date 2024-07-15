@@ -15,7 +15,9 @@ dependencies = [
 name = "app"
 version = "0.1.0"
 dependencies = [
- "ts_block_builder",
+ "quote",
+ "ts-macro",
+ "ts-macro-builder",
 ]
 
 [[package]]
@@ -105,26 +107,17 @@ dependencies = [
 ]
 
 [[package]]
-name = "test-macro"
-version = "0.1.0"
-dependencies = [
- "pretty_assertions",
- "proc-macro2",
- "quote",
- "syn",
-]
-
-[[package]]
-name = "ts-macro-test-common"
+name = "ts-macro"
 version = "0.1.0"
 dependencies = [
  "proc-macro2",
  "quote",
  "syn",
+ "ts-macro-impl",
 ]
 
 [[package]]
-name = "ts_block_builder"
+name = "ts-macro-builder"
 version = "0.1.0"
 dependencies = [
  "lazy_static",
@@ -132,8 +125,28 @@ dependencies = [
  "quote",
  "regex",
  "syn",
- "ts-macro-test-common",
+ "ts-macro-common",
  "unicode-xid",
+]
+
+[[package]]
+name = "ts-macro-common"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "ts-macro-impl"
+version = "0.1.0"
+dependencies = [
+ "pretty_assertions",
+ "proc-macro2",
+ "quote",
+ "syn",
+ "ts-macro-common",
 ]
 
 [[package]]

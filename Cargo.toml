@@ -1,7 +1,8 @@
 [workspace]
 
 members = [
-  "test-macro",
+  "macro",
+  "macro-impl",
   "app",
   "builder",
   "common",

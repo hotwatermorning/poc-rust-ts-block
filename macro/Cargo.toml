@@ -1,0 +1,19 @@
+[package]
+name = "ts-macro"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["lib"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+proc-macro2 = "1.0.86"
+syn = { version = "2.0.71", features = ["full", "extra-traits", "visit"] }
+quote = "1.0.36"
+ts-macro-impl = { path = "../macro-impl", version = "=0.1.0" }
+
+[dev-dependencies]
+ts-macro-impl = { path = "../macro-impl", version = "=0.1.0" }
+
