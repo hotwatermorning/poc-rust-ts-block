@@ -1,0 +1,16 @@
+[package]
+name = "ts_block_builder"
+version = "0.1.0"
+edition = "2018"
+
+[lib]
+crate-type = ["lib"]
+
+[dependencies]
+proc-macro2 = "1.0.86"
+syn = { version = "2.0.71", features = ["full", "extra-traits"] }
+quote = "1.0.36"
+ts-macro-test-common = { path = "../common", version = "=0.1.0" }
+lazy_static = "1.5.0"
+regex = "1.10.5"
+unicode-xid = "0.2.4"

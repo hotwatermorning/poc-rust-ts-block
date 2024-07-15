@@ -1,5 +1,5 @@
-extern crate cpp_build;
+use ts_block_builder;
 
 fn main() {
-    cpp_build::build("src/main.rs");
+    ts_block_builder::build("src/main.rs");
 }

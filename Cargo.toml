@@ -3,4 +3,6 @@
 members = [
   "test-macro",
   "app",
+  "builder",
+  "common",
 ]
