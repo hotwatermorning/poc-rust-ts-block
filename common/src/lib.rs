@@ -70,7 +70,7 @@ pub enum Macro {
 }
 
 impl Parse for Macro {
-    ///! Parse the inside of a `cpp!` macro (a literal or a closure)
+    ///! Parse the inside of a `ts_block!` macro (a literal or a closure)
     fn parse(input: ParseStream) -> Result<Self> {
         Ok(Macro::Closure(input.parse::<Closure>()?))
     }

@@ -270,7 +270,7 @@ impl Parser {
 lazy_static! {
     pub static ref OUT_DIR: PathBuf = PathBuf::from(env::var("OUT_DIR").expect(
         r#"
--- rust-cpp fatal error --
+-- poc-rust-ts-block fatal error --
 
 The OUT_DIR environment variable was not set.
 NOTE: rustc must be run by Cargo."#
@@ -278,10 +278,10 @@ NOTE: rustc must be run by Cargo."#
     static ref TS_AUTOGEN_DIR: PathBuf = OUT_DIR.join("ts_block_macro_test");
     static ref CARGO_MANIFEST_DIR: PathBuf = PathBuf::from(env::var("CARGO_MANIFEST_DIR").expect(
         r#"
--- rust-cpp fatal error --
+-- poc-rust-ts-block fatal error --
 
 The CARGO_MANIFEST_DIR environment variable was not set.
-NOTE: rust-cpp's build function must be run in a build script."#
+NOTE: poc-rust-ts-block's build function must be run in a build script."#
     ));
 }
 
@@ -329,7 +329,7 @@ fn clean_artifacts() {
     if TS_AUTOGEN_DIR.is_dir() {
         remove_dir_all(&*TS_AUTOGEN_DIR).expect(
             r#"
--- rust-cpp fatal error --
+-- poc-rust-ts-block fatal error --
 
 Failed to remove existing build artifacts from output directory."#,
         );
@@ -337,14 +337,12 @@ Failed to remove existing build artifacts from output directory."#,
 
     create_dir(&*TS_AUTOGEN_DIR).expect(
         r#"
--- rust-cpp fatal error --
+-- poc-rust-ts-block fatal error --
 
 Failed to create output object directory."#,
     );
 }
 
-/// Run the `cpp` build process on the crate with a root at the given path.
-/// Intended to be used within `build.rs` files.
 pub fn build<P: AsRef<Path>>(source_path: P) {
     // Clean up any leftover artifacts
     clean_artifacts();
@@ -352,8 +350,8 @@ pub fn build<P: AsRef<Path>>(source_path: P) {
     let mut visitor = Parser::default();
     if let Err(err) = visitor.parse_source(source_path.as_ref().to_owned()) {
         warnln!(
-            r#"-- rust-cpp parse error --
-There was an error parsing the crate for the rust-cpp build script:
+            r#"-- poc-rust-ts-block parse error --
+There was an error parsing the crate for the poc-rust-ts-block build script:
 {:?}
 In order to provide a better error message, the build script will exit successfully, such that rustc can provide an error message."#,
             err
