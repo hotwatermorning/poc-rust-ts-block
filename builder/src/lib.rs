@@ -287,7 +287,6 @@ NOTE: rust-cpp's build function must be run in a build script."#
 
 fn gen_cpp_lib(visitor: &Parser) -> PathBuf {
     let result_path = TS_AUTOGEN_DIR.join("autogen.ts");
-    println!("result file path: {}", result_path.to_str().unwrap());
     let mut output = File::create(&result_path).expect("Unable to generate *.ts file");
 
     for Closure { body_str, sig, .. } in &visitor.closures {
