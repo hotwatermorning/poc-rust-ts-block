@@ -25,7 +25,7 @@ impl ClosureSig {
 
     pub fn extern_name(&self) -> Ident {
         Ident::new(
-            &format!("__cpp_closure_{}", self.name_hash()),
+            &format!("__ts_block_closure_{}", self.name_hash()),
             Span::call_site(),
         )
     }
@@ -40,7 +40,7 @@ pub struct Closure {
 }
 
 impl Parse for Closure {
-    /// Parse the inside of a `cpp!` macro when this macro is a closure.
+    /// Parse the inside of a `ts_block!` macro when this macro is a closure.
     /// Example: `unsafe [foo as "int"] -> u32 as "int" { /*... */ }
     fn parse(input: ParseStream) -> Result<Self> {
         input.parse::<Option<Token![unsafe]>>()?;

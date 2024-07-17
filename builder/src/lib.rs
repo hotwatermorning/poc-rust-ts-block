@@ -285,7 +285,7 @@ NOTE: poc-rust-ts-block's build function must be run in a build script."#
     ));
 }
 
-fn gen_cpp_lib(visitor: &Parser) -> PathBuf {
+fn gen_ts_lib(visitor: &Parser) -> PathBuf {
     let result_path = TS_AUTOGEN_DIR.join("autogen.ts");
     let mut output = File::create(&result_path).expect("Unable to generate *.ts file");
 
@@ -360,7 +360,7 @@ In order to provide a better error message, the build script will exit successfu
     }
 
     // Generate the C++ library code
-    let filename = gen_cpp_lib(&visitor);
+    let filename = gen_ts_lib(&visitor);
 
     println!(
         "cargo::rustc-env=TS_AUTOGEN_FILE={}",
