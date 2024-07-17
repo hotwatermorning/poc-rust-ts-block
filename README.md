@@ -32,7 +32,7 @@ Hello TS World
 
 ## Prerequisites
 
-* npx
+* [tsx](https://www.npmjs.com/package/tsx)
 * rust 1.78 or later
 
 ## How to build
